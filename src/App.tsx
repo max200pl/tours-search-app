@@ -1,10 +1,10 @@
 import "./App.css";
-import { SearchToursForm } from "./features/geo/ui/components/SearchToursForm/SearchToursForm.tsx";
+import SearchToursPage from "./Pages/SearchToursPage/SearchToursPage.tsx";
 
 const App = () => {
   return (
     <div className="container">
-      <SearchToursForm />
+      <SearchToursPage />
     </div>
   );
 };
