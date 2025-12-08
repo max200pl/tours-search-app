@@ -1,7 +1,7 @@
 import { startSearchPrices, getSearchPrices } from "../../../api/api.js";
+import type { ErrorResponseDto } from "../../../api/http/error.types.js";
 import type {
   StartSearchResponseDto,
-  ErrorResponseDto,
   PricesResponseDto,
 } from "../domain/search.dto";
 

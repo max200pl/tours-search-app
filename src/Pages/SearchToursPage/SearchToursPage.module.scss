@@ -10,6 +10,8 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
+        margin: 0 auto;
+        margin-top: 40px;
 
         width: 100%;
         max-width: 340px;
@@ -27,5 +29,9 @@
 
     &__results {
         margin-top: 12px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }

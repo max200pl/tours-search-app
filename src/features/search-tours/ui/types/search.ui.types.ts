@@ -1,8 +1,7 @@
-export interface Tour {
-  id: string;
-  amount: number;
-  currency: string;
-  startDate: string;
-  endDate: string;
-  hotelId: string | null;
+import type { PriceOfferDto } from "../../domain/search.dto";
+import type { CountryDto, HotelDto } from "../../../geo/domain/geo.dto";
+
+export interface UITour extends PriceOfferDto {
+  hotel: HotelDto | null;
+  flag: CountryDto["flag"] | null;
 }

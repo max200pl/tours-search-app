@@ -1,4 +1,4 @@
-import type { ErrorResponseDto } from "../domain/search.dto";
+import type { ErrorResponseDto } from "../../../api/http/error.types";
 
 export function mapStartError(err: ErrorResponseDto) {
   switch (err.code) {

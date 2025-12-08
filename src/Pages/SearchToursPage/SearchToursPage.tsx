@@ -6,6 +6,7 @@ import { useSearchTours } from "../../features/search-tours/hooks/useSearchTours
 import SearchToursEmpty from "../../features/search-tours/ui/components/SearchToursEmpty";
 import SearchToursError from "../../features/search-tours/ui/components/SearchToursError";
 import SearchToursLoader from "../../features/search-tours/ui/components/SearchToursLoader";
+import SearchToursGrid from "../../features/search-tours/ui/components/SearchToursGrid";
 
 import styles from "./SearchToursPage.module.scss";
 
@@ -42,7 +43,7 @@ export const SearchToursPage = () => {
         <ActionButton
           type="submit"
           disabled={!selectedCountry || selectedCountry.type !== "country"}
-          label="Знайти тури"
+          label="Знайти"
         />
 
         {error && <SearchToursError message={error} />}
@@ -52,6 +53,10 @@ export const SearchToursPage = () => {
         {isLoading && <SearchToursLoader />}
 
         {isEmpty && !isLoading && !error && <SearchToursEmpty />}
+
+        {!isLoading && !error && tours && tours.length > 0 && (
+          <SearchToursGrid tours={tours} />
+        )}
       </div>
     </div>
   );
