@@ -7,13 +7,14 @@ import type { GeoUIEntity } from "../../types/geo.ui.types";
 import SearchToursDropdown from "./components/SearchToursDropdown";
 
 import styles from "./SearchToursInput.module.scss";
-
 interface SearchToursInputProps {
   onSelectChange?: (value: GeoUIEntity | null) => void;
+  onTypingCancel?: () => void;
 }
 
 export default function SearchToursInput({
   onSelectChange,
+  onTypingCancel,
 }: SearchToursInputProps) {
   const {
     value,
@@ -44,12 +45,16 @@ export default function SearchToursInput({
       <div className={styles.input__control} ref={wrapperRef}>
         <SearchInput
           value={value}
-          onChange={setValue}
+          onChange={(text) => {
+            setValue(text);
+            onTypingCancel?.();
+          }}
           onFocus={openDropdown}
           onClick={openDropdown}
           onClear={() => {
             clear();
             onSelectChange?.(null);
+            onTypingCancel?.();
           }}
           placeholder="Країна, місто або готель"
         />

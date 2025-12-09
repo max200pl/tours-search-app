@@ -15,20 +15,13 @@ export const SearchToursPage = () => {
     null
   );
 
-  const { search, tours, isLoading, error, isEmpty } = useSearchTours();
+  const { search, cancelSearch, tours, isLoading, error, isEmpty } =
+    useSearchTours();
 
   const handleSearchClick = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!selectedCountry) {
-      console.warn("Country not selected");
-      return;
-    }
-
-    if (selectedCountry.type !== "country") {
-      console.warn("Selected entity is not a country");
-      return;
-    }
+    if (!selectedCountry || selectedCountry.type !== "country") return;
 
     search(selectedCountry.id);
   };
@@ -38,11 +31,16 @@ export const SearchToursPage = () => {
       <form className={styles.page__form} onSubmit={handleSearchClick}>
         <h1 className={styles.page__form_title}>Форма пошуку турів</h1>
 
-        <SearchToursInput onSelectChange={setSelectedCountry} />
+        <SearchToursInput
+          onSelectChange={setSelectedCountry}
+          onTypingCancel={cancelSearch}
+        />
 
         <ActionButton
           type="submit"
-          disabled={!selectedCountry || selectedCountry.type !== "country"}
+          disabled={
+            !selectedCountry || selectedCountry.type !== "country" || isLoading
+          }
           label="Знайти"
         />
 
@@ -51,12 +49,10 @@ export const SearchToursPage = () => {
 
       <div className={styles.page__results}>
         {isLoading && <SearchToursLoader />}
-
         {isEmpty && !isLoading && !error && <SearchToursEmpty />}
-
-        {!isLoading && !error && tours && tours.length > 0 && (
+        {!isLoading && !error && tours?.length ? (
           <SearchToursGrid tours={tours} />
-        )}
+        ) : null}
       </div>
     </div>
   );
